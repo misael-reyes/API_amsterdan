@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Paciente;
+use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
-
-    protected $table = 'usuarios';
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +16,8 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::where('id_paciente',1)->first();
-        return $pacientes->usuario;
+        $pacientes = Paciente::all();
+        return $pacientes;
     }
 
     /**
@@ -30,15 +28,25 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+        //validamos los campos
+        $request->validate([
+            'nombre_completo' => 'required',
+            'nombre_usuario' => 'required',
+            'password' => 'required'
+        ]);
+
         //insertamos al usuario
-        $paciente = new Paciente();
-        $paciente->nombre_completo = $request->nombre_completo;
-        $paciente->nombre_usuario = $request->nombre_usuario;
-        $paciente->password = $request->password;
-        //$id_usuario = DB::getPdo()->lastInsertId();
+        $usuario = new Usuario();
+        $usuario->nombre_completo = $request->nombre_completo;
+        $usuario->nombre_usuario = $request->nombre_usuario;
+        $usuario->password = $request->password;
+        $usuario->save();
+        $id_usuario = DB::getPdo()->lastInsertId();
         //insertamos al paciente
-        //$paciente->usuario_id = $id_usuario;
+        $paciente = new Paciente();
+        $paciente->usuario_id = $id_usuario;
         $paciente->save();
+        return $paciente;
     }
 
     /**
@@ -49,18 +57,9 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $paciente = Paciente::where('id_paciente',$id)->first();
+        $paciente->usuario;
+        return $paciente;
     }
 
     /**

@@ -10,10 +10,10 @@ use App\Models\Receta;
 class Paciente extends Usuario
 {
     use HasFactory;
-/*
+
     protected $fillable = [
         'usuario_id'
-    ];*/
+    ];
 
     /**
      * función para retornar la info del usuario al que esta asignado el 

@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/pacientes', [PacienteController::class, 'index']);
-//Route::get('/pacientes', [PacienteController::class, 'store']);
+//rutas para los pacientes
+Route::apiResource('pacientes', PacienteController::class);
