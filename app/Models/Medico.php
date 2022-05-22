@@ -11,6 +11,8 @@ class Medico extends Usuario
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_medico';
+
     protected $fillable = [
         'cedula_profesional',
         'email',
@@ -18,9 +20,9 @@ class Medico extends Usuario
     ];
 
     //relación uno a uno inverso
-    // public function usuario() {
-    //     return $this->belongsTo(Usuario::class, 'usuario_id', 'id_usuario');
-    // }
+    public function usuario() {
+        return $this->belongsTo(Usuario::class, 'usuario_id', 'id_usuario');
+    }
 
     //relación uno a muchos
     public function recetas() {

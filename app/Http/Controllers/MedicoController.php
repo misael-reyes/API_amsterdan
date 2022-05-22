@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Paciente;
+use App\Models\Medico;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 
-class PacienteController extends Controller
+class MedicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::all();
-        return $pacientes;
+        $medicos = Medico::all();
+        return $medicos;
     }
 
     /**
@@ -28,11 +28,12 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //validamos los campos
         $request->validate([
             'nombre_completo' => 'required',
             'nombre_usuario' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'cedula_profesional' => 'required',
+            'email' => 'required'
         ]);
 
         //insertamos al usuario
@@ -42,16 +43,13 @@ class PacienteController extends Controller
         $usuario->password = $request->password;
         $usuario->save();
         $id_usuario = DB::getPdo()->lastInsertId();
-        //insertamos al paciente
-        $paciente = new Paciente();
-        $paciente->usuario_id = $id_usuario;
-        $paciente->save();
-        return $paciente;
-
-        /**
-         * esta forma usaremos para insertar otros objetos
-         * $task = Task::create($request->all());
-         */
+        //insertamos al medico
+        $medico = new Medico();
+        $medico->usuario_id = $id_usuario;
+        $medico->cedula_profesional = $request->cedula_profesional;
+        $medico->email = $request->email;
+        $medico->save();
+        return $medico;
     }
 
     /**
@@ -62,9 +60,9 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        $paciente = Paciente::findOrFail($id);
-        $paciente->usuario;
-        return $paciente;
+        $medico = Medico::findOrFail($id);
+        $medico->usuario;
+        return $medico;
     }
 
     /**
@@ -76,13 +74,18 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$usuario = Usuario::findOrFail($id)->update($request->all());
+        //actualizamos al usuario
         $usuario = Usuario::findOrFail($request->usuario_id);
         $usuario->nombre_completo = $request->nombre_completo;
         $usuario->nombre_usuario = $request->nombre_usuario;
         $usuario->password = $request->password;
         $usuario->save();
-        return "usuario actualizado";
+        //actualizamos al medico
+        $medico = Medico::findOrFail($id);
+        $medico->cedula_profesional = $request->cedula_profesional;
+        $medico->email = $request->email;
+        $medico->save();
+        return "medico actualizado";
     }
 
     /**
@@ -94,6 +97,6 @@ class PacienteController extends Controller
     public function destroy($id)
     {
         Usuario::destroy($id);
-        return "se eliminó el registro con el id: ". $id;
+        return "se eliminó el usuario";
     }
 }
