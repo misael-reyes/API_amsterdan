@@ -11,6 +11,9 @@ class Paciente extends Usuario
 {
     use HasFactory;
 
+    //aclaramos a laravel el nombre del primary key
+    protected $primaryKey = 'id_paciente';
+
     protected $fillable = [
         'usuario_id'
     ];

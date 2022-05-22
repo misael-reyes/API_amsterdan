@@ -47,6 +47,11 @@ class PacienteController extends Controller
         $paciente->usuario_id = $id_usuario;
         $paciente->save();
         return $paciente;
+
+        /**
+         * esta forma usaremos para insertar otros objetos
+         * $task = Task::create($request->all());
+         */
     }
 
     /**
@@ -57,7 +62,7 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        $paciente = Paciente::where('id_paciente',$id)->first();
+        $paciente = Paciente::findOrFail($id);
         $paciente->usuario;
         return $paciente;
     }
@@ -71,7 +76,13 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //$usuario = Usuario::findOrFail($id)->update($request->all());
+        $usuario = Usuario::findOrFail($id);
+        $usuario->nombre_completo = $request->nombre_completo;
+        $usuario->nombre_usuario = $request->nombre_usuario;
+        $usuario->password = $request->password;
+        $usuario->save();
+        return "usuario actualizado";
     }
 
     /**
@@ -82,6 +93,7 @@ class PacienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Usuario::destroy($id);
+        return "se eliminó el registro con el id: ". $id;
     }
 }
