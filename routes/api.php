@@ -4,6 +4,7 @@ use App\Http\Controllers\Detalle_recetaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RecetaController;
 use Illuminate\Http\Request;
@@ -36,3 +37,5 @@ Route::apiResource('medicamentos', MedicamentoController::class);
 Route::apiResource('recetas', RecetaController::class);
 //rutas para los detalles de las recetas
 Route::apiResource('detalle_recetas', Detalle_recetaController::class);
+//rutas para las medidas
+Route::apiResource('medidas', MedidaController::class);
