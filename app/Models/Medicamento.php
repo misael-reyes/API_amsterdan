@@ -12,6 +12,8 @@ class Medicamento extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_medicamento';
+
     protected $fillable = [
         'nombre_medicamento',
         'via_administracion',

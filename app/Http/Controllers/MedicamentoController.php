@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Horario;
+use App\Models\Medicamento;
 use Illuminate\Http\Request;
 
-class HorarioController extends Controller
+class MedicamentoController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $horarios = Horario::all();
-        return $horarios;
+        $medicamentos = Medicamento::all();
+        return $medicamentos;
     }
 
     /**
@@ -27,15 +27,14 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fecha_inicio' => 'required',
-            'duracion' => 'required',
-            'dosis' => 'required',
-            'periodo' => 'required',
-            'hora_inicio' => 'required'
+            'nombre_medicamento' => 'required',
+            'via_administracion' => 'required',
+            'valor_medida' => 'required',
+            'horario_id' => 'required',
+            'medida_id' => 'required'
         ]);
-
-        $horario = Horario::create($request->all());
-        return $horario;
+        $medicamento = Medicamento::create($request->all());
+        return $medicamento;
     }
 
     /**
@@ -46,8 +45,8 @@ class HorarioController extends Controller
      */
     public function show($id)
     {
-        $horario = Horario::findOrFail($id);
-        return $horario;
+        $medicamento = Medicamento::findOrFail($id);
+        return $medicamento;
     }
 
     /**
@@ -59,8 +58,8 @@ class HorarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $horario = Horario::findOrFail($id)->update($request->all());
-        return "horario actualizado";
+        $medicamento = Medicamento::findOrFail($id)->update($request->all());
+        return "medicamento actualizado";
     }
 
     /**
@@ -71,7 +70,7 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
-        Horario::destroy($id);
-        return "se elimino el horario";
+        Medicamento::destroy($id);
+        return "se elimino el medicamento";
     }
 }

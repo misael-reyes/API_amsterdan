@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Http\Request;
@@ -27,3 +28,5 @@ Route::apiResource('pacientes', PacienteController::class);
 Route::apiResource('medicos', MedicoController::class);
 //rutas para los horarios
 Route::apiResource('horarios', HorarioController::class);
+//rutas para los medicamentos
+Route::apiResource('medicamentos', MedicamentoController::class);
