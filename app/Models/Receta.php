@@ -12,6 +12,8 @@ class Receta extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_receta';
+
     protected $fillable = [
         'medico_id',
         'paciente_id'
