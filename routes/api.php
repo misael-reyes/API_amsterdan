@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Detalle_recetaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\MedicoController;
@@ -33,3 +34,5 @@ Route::apiResource('horarios', HorarioController::class);
 Route::apiResource('medicamentos', MedicamentoController::class);
 //rutas para las recetas
 Route::apiResource('recetas', RecetaController::class);
+//rutas para los detalles de las recetas
+Route::apiResource('detalle_recetas', Detalle_recetaController::class);
