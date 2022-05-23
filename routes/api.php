@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Http\Request;
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('pacientes', PacienteController::class);
 //rutas para los medicos
 Route::apiResource('medicos', MedicoController::class);
+//rutas para los horarios
+Route::apiResource('horarios', HorarioController::class);

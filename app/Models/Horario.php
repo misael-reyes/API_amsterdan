@@ -10,6 +10,8 @@ class Horario extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_horario';
+
     protected $fillable = [
         'fecha_inicio',
         'duracion',
