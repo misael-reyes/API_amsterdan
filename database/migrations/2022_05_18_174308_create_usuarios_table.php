@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('nombre_completo', 60);
             $table->string('nombre_usuario', 20);
             $table->string('password', 20);
+            $table->unsignedBigInteger('rol_id')->nullable();
+            $table->foreign('rol_id')
+                ->references('id_rol')
+                ->on('rols')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
