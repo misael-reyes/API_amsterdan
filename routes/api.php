@@ -7,6 +7,7 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,5 @@ Route::apiResource('recetas', RecetaController::class);
 Route::apiResource('detalle_recetas', Detalle_recetaController::class);
 //rutas para las medidas
 Route::apiResource('medidas', MedidaController::class);
+//ruta para el login
+Route::post('login', [UsuarioController::class, 'login']);
