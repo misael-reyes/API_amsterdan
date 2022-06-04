@@ -32,6 +32,7 @@ class MedicoController extends Controller
             'nombre_completo' => 'required',
             'nombre_usuario' => 'required',
             'password' => 'required',
+            'rol_id' => 'required',
             'cedula_profesional' => 'required',
             'email' => 'required'
         ]);
@@ -41,6 +42,7 @@ class MedicoController extends Controller
         $usuario->nombre_completo = $request->nombre_completo;
         $usuario->nombre_usuario = $request->nombre_usuario;
         $usuario->password = $request->password;
+        $usuario->rol_id = $request->rol_id;
         $usuario->save();
         $id_usuario = DB::getPdo()->lastInsertId();
         //insertamos al medico
@@ -79,6 +81,7 @@ class MedicoController extends Controller
         $usuario->nombre_completo = $request->nombre_completo;
         $usuario->nombre_usuario = $request->nombre_usuario;
         $usuario->password = $request->password;
+        $usuario->rol_id = $request->rol_id;
         $usuario->save();
         //actualizamos al medico
         $medico = Medico::findOrFail($id);
