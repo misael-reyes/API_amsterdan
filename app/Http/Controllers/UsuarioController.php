@@ -18,7 +18,7 @@ class UsuarioController extends Controller
         $pass = $request->password;
         $usuario = Usuario::where('nombre_usuario', $name)
             ->where('password', $pass)->first();
-        if(isset($usuario)) {   
+        /*if(isset($usuario)) {   
             $rol = $usuario->rol_id;
             switch($rol) {
                 case 1: //es medico
@@ -32,7 +32,10 @@ class UsuarioController extends Controller
                 default:
                     return "defatult";
             }
+        }*/
+        if(isset($usuario)) {
+            return $usuario;
         }
-        return "no existe el usuario";
+        return response()->json('Data not found', 404);
     }
 }
